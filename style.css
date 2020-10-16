@@ -1,33 +1,11 @@
 #visual-container {
-    /* background-color: skyblue; */
     width: 80%;
     padding: 5%;
     margin: 100px auto;
     display: flex;
 }
 
-.block {
-    float: left;
-    padding: 10px;
-    background-color: #58b7ff;
-    transition: 0.2s all ease;
-}
-
-.block__id {
-    position: relative;
-    top: -30px;
-    width: 100%;
-    text-align: center;
-}
-
-.block-unsorted {
-    background-color: #58b7ff;
-}
-
-.block-comparing {
-    background-color: #ff4949;
-}
-
-.block-sorted {
-    background-color: #13ce66;
+#sortingSVG {
+    background-color: skyblue;
+    padding: 4%;
 }

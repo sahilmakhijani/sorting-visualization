@@ -1,21 +1,50 @@
 
 // Value should be between 0 to 100;
-arrayElements = [5, 2, 7, 9, 20, 1, 4, 8, 21, 3, 13, 37];
+arrayElements = [50, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17];
 
 sortingData = [
-    { "position": 0, "value": 5, "color": "blue" },
-    { "position": 1, "value": 2, "color": "blue" },
-    { "position": 2, "value": 7, "color": "blue" },
-    { "position": 3, "value": 9, "color": "blue" },
-    { "position": 4, "value": 20, "color": "blue" },
-    { "position": 5, "value": 1, "color": "blue" },
-    { "position": 6, "value": 4, "color": "blue" },
-    { "position": 7, "value": 8, "color": "blue" },
+    { "position": 0, "value": 50, "color": "blue" },
+    { "position": 1, "value": 20, "color": "blue" },
+    { "position": 2, "value": 70, "color": "blue" },
+    { "position": 3, "value": 90, "color": "blue" },
+    { "position": 4, "value": 21, "color": "blue" },
+    { "position": 5, "value": 10, "color": "blue" },
+    { "position": 6, "value": 40, "color": "blue" },
+    { "position": 7, "value": 80, "color": "blue" },
     { "position": 8, "value": 21, "color": "blue" },
-    { "position": 9, "value": 3, "color": "blue" },
+    { "position": 9, "value": 30, "color": "blue" },
     { "position": 10, "value": 13, "color": "blue" },
     { "position": 11, "value": 37, "color": "blue" },
+    { "position": 12, "value": 56, "color": "blue" },
+    { "position": 13, "value": 75, "color": "blue" },
+    { "position": 14, "value": 90, "color": "blue" },
+    { "position": 15, "value": 99, "color": "blue" },
+    { "position": 16, "value": 17, "color": "blue" },
+    { "position": 17, "value": 20, "color": "blue" },
+    { "position": 18, "value": 70, "color": "blue" },
+    { "position": 19, "value": 90, "color": "blue" },
+    { "position": 20, "value": 21, "color": "blue" },
+    { "position": 21, "value": 10, "color": "blue" },
+    { "position": 22, "value": 40, "color": "blue" },
+    { "position": 23, "value": 80, "color": "blue" },
+    { "position": 24, "value": 21, "color": "blue" },
+    { "position": 25, "value": 30, "color": "blue" },
+    { "position": 26, "value": 13, "color": "blue" },
+    { "position": 27, "value": 37, "color": "blue" },
+    { "position": 28, "value": 56, "color": "blue" },
+    { "position": 29, "value": 75, "color": "blue" },
+    { "position": 30, "value": 90, "color": "blue" },
+    { "position": 31, "value": 99, "color": "blue" },
+    { "position": 32, "value": 17, "color": "blue" },
 ];
+
+async function delay(duration) {
+    return new Promise(resolve =>
+        setTimeout(() => {
+            resolve();
+        }, duration)
+    );
+}
 
 function swapElementsAtIndex(idx1, idx2) {
     var tempValue = arrayElements[idx1];
@@ -65,13 +94,13 @@ function draw(initialData) {
     var labels = bars.append("text");
 
     var lableAttrs = labels
-        .attr("x", function (d, i) { return (1000 * d.position + 500) / initialData.length; })
+        .attr("x", function (d, i) { return ((1000 * d.position + 500) / initialData.length) - 10; })
         .attr("y", function (d) { return (100 - d.value) - 10; })
         .text(function (d) { return d.value; });
 
 }
 
-function redraw(newData, transitionDuration = 1000) {
+function redraw(newData, transitionDuration = 100) {
     sortingSVG = d3.select("#visual-container")
 
     var bars = sortingSVG.selectAll("g")
@@ -87,28 +116,19 @@ function redraw(newData, transitionDuration = 1000) {
         .style("fill", function (d) { return d.color; });
 
     var lableAttrs = bars.select("text")
-        .attr("x", function (d, i) { return (1000 * d.position + 500) / newData.length; })
+        .attr("x", function (d, i) { return ((1000 * d.position + 500) / newData.length) - 10; })
         .attr("y", function (d) { return (100 - d.value) - 10; })
         .text(function (d) { return d.value; });
 
 }
 
-async function bubbleSort(delay = 1000) {
-    if (delay && typeof delay !== "number") {
-        alert("sort: First argument must be a typeof Number");
-        return;
-    }
-
-    for (let i = 0; i < arrayElements.length - 1; i += 1) {
-        for (let j = 0; j < arrayElements.length - i - 1; j += 1) {
+async function bubbleSort(delayDuration = 100) {
+    for (let i = 0; i < arrayElements.length - 1; i++) {
+        for (let j = 0; j < arrayElements.length - i - 1; j++) {
             changeColor(j, "red");
             changeColor(j + 1, "red");
 
-            await new Promise(resolve =>
-                setTimeout(() => {
-                    resolve();
-                }, delay)
-            );
+            await delay(delayDuration);
 
             if (arrayElements[j] > arrayElements[j + 1]) {
                 swapElementsAtIndex(j, j + 1);
@@ -123,6 +143,56 @@ async function bubbleSort(delay = 1000) {
     changeColor(0, "green");
 }
 
+async function selectionSort(delayDuration = 400) {
+    for (let i = 0; i < arrayElements.length - 1; i++) {
+        
+        var minIdx = i;
+        changeColor(minIdx, "yellow");
+
+        for (let j = i + 1; j < arrayElements.length; j++) {
+            if (i != minIdx) changeColor(i, "red");
+            if (j != minIdx) changeColor(j, "red");
+
+            await delay(delayDuration);
+
+            if (arrayElements[minIdx] > arrayElements[j]) {
+                changeColor(minIdx, (minIdx == i || minIdx == j) ? "red" : "blue");
+                minIdx = j;
+                changeColor(minIdx, "yellow");
+            }
+
+            if (i != minIdx) changeColor(i, "blue");
+            if (j != minIdx) changeColor(j, "blue");
+        }
+
+        if (minIdx != i) {
+            swapElementsAtIndex(i, minIdx);
+        }
+
+        changeColor(i, "green");
+    }
+    changeColor((arrayElements.length - 1), "green");
+}
+
+async function insertionSort(delayDuration = 400) {
+    changeColor(0, "green");
+    for (let i = 1; i < arrayElements.length; i++) {       
+        for (let j = i; j > 0; j--) {
+            if(arrayElements[j - 1] > arrayElements[j]) {
+                changeColor(j - 1, "red");
+                changeColor(j, "yellow");
+
+                await delay(delayDuration);
+
+                swapElementsAtIndex(j - 1, j);
+
+                changeColor(j - 1, "blue");
+                changeColor(j, "blue");
+            }
+        }
+    }
+}
+
 
 draw(sortingData);
-bubbleSort();
+insertionSort();
