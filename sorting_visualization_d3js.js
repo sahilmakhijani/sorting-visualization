@@ -4,7 +4,10 @@ arrayElements = [50, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99,
 
 sortingData = [];
 
+duration = 100;
+
 function generateSortingData() {
+    sortingData = [];
     arrayElements.forEach((elem, idx) => {
         sortingData.push({
             "position": idx,
@@ -76,13 +79,13 @@ function draw(initialData) {
 
 }
 
-function redraw(newData, transitionDuration = 100) {
+function redraw(newData) {
     sortingSVG = d3.select("#visual-container")
 
     var bars = sortingSVG.selectAll("g")
         .data(newData)
         .transition()
-        .duration(transitionDuration)
+        .duration(duration)
 
     var rectAttrs = bars.select("rect")
         .attr("x", function (d, i) { return (d.position * 1000 / newData.length) + 1; })
@@ -98,13 +101,13 @@ function redraw(newData, transitionDuration = 100) {
 
 }
 
-async function bubbleSort(delayDuration = 100) {
+async function bubbleSort() {
     for (let i = 0; i < arrayElements.length - 1; i++) {
         for (let j = 0; j < arrayElements.length - i - 1; j++) {
             changeColor(j, "red");
             changeColor(j + 1, "red");
 
-            await delay(delayDuration);
+            await delay(duration);
 
             if (arrayElements[j] > arrayElements[j + 1]) {
                 swapElementsAtIndex(j, j + 1);
@@ -121,7 +124,7 @@ async function bubbleSort(delayDuration = 100) {
     return arrayElements;
 }
 
-async function selectionSort(delayDuration = 100) {
+async function selectionSort() {
     for (let i = 0; i < arrayElements.length - 1; i++) {
 
         var minIdx = i;
@@ -131,7 +134,7 @@ async function selectionSort(delayDuration = 100) {
             if (i != minIdx) changeColor(i, "red");
             if (j != minIdx) changeColor(j, "red");
 
-            await delay(delayDuration);
+            await delay(duration);
 
             if (arrayElements[minIdx] > arrayElements[j]) {
                 changeColor(minIdx, (minIdx == i || minIdx == j) ? "red" : "blue");
@@ -154,7 +157,7 @@ async function selectionSort(delayDuration = 100) {
     return arrayElements;
 }
 
-async function insertionSort(delayDuration = 100) {
+async function insertionSort() {
     changeColor(0, "green");
     for (let i = 1; i < arrayElements.length; i++) {
         for (let j = i; j > 0; j--) {
@@ -162,7 +165,7 @@ async function insertionSort(delayDuration = 100) {
                 changeColor(j - 1, "red");
                 changeColor(j, "yellow");
 
-                await delay(delayDuration);
+                await delay(duration);
 
                 swapElementsAtIndex(j - 1, j);
 
