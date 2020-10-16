@@ -143,9 +143,9 @@ async function bubbleSort(delayDuration = 100) {
     changeColor(0, "green");
 }
 
-async function selectionSort(delayDuration = 400) {
+async function selectionSort(delayDuration = 100) {
     for (let i = 0; i < arrayElements.length - 1; i++) {
-        
+
         var minIdx = i;
         changeColor(minIdx, "yellow");
 
@@ -174,11 +174,11 @@ async function selectionSort(delayDuration = 400) {
     changeColor((arrayElements.length - 1), "green");
 }
 
-async function insertionSort(delayDuration = 400) {
+async function insertionSort(delayDuration = 100) {
     changeColor(0, "green");
-    for (let i = 1; i < arrayElements.length; i++) {       
+    for (let i = 1; i < arrayElements.length; i++) {
         for (let j = i; j > 0; j--) {
-            if(arrayElements[j - 1] > arrayElements[j]) {
+            if (arrayElements[j - 1] > arrayElements[j]) {
                 changeColor(j - 1, "red");
                 changeColor(j, "yellow");
 
