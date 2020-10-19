@@ -1,42 +1,21 @@
 
 // Value should be between 0 to 100;
-arrayElements = [50, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17];
+arrayElements = [50, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17, 35, 47, 89, 93, 97, 61, 30, 34];
 
-sortingData = [
-    { "position": 0, "value": 50, "color": "blue" },
-    { "position": 1, "value": 20, "color": "blue" },
-    { "position": 2, "value": 70, "color": "blue" },
-    { "position": 3, "value": 90, "color": "blue" },
-    { "position": 4, "value": 21, "color": "blue" },
-    { "position": 5, "value": 10, "color": "blue" },
-    { "position": 6, "value": 40, "color": "blue" },
-    { "position": 7, "value": 80, "color": "blue" },
-    { "position": 8, "value": 21, "color": "blue" },
-    { "position": 9, "value": 30, "color": "blue" },
-    { "position": 10, "value": 13, "color": "blue" },
-    { "position": 11, "value": 37, "color": "blue" },
-    { "position": 12, "value": 56, "color": "blue" },
-    { "position": 13, "value": 75, "color": "blue" },
-    { "position": 14, "value": 90, "color": "blue" },
-    { "position": 15, "value": 99, "color": "blue" },
-    { "position": 16, "value": 17, "color": "blue" },
-    { "position": 17, "value": 20, "color": "blue" },
-    { "position": 18, "value": 70, "color": "blue" },
-    { "position": 19, "value": 90, "color": "blue" },
-    { "position": 20, "value": 21, "color": "blue" },
-    { "position": 21, "value": 10, "color": "blue" },
-    { "position": 22, "value": 40, "color": "blue" },
-    { "position": 23, "value": 80, "color": "blue" },
-    { "position": 24, "value": 21, "color": "blue" },
-    { "position": 25, "value": 30, "color": "blue" },
-    { "position": 26, "value": 13, "color": "blue" },
-    { "position": 27, "value": 37, "color": "blue" },
-    { "position": 28, "value": 56, "color": "blue" },
-    { "position": 29, "value": 75, "color": "blue" },
-    { "position": 30, "value": 90, "color": "blue" },
-    { "position": 31, "value": 99, "color": "blue" },
-    { "position": 32, "value": 17, "color": "blue" },
-];
+sortingData = [];
+
+duration = 100;
+
+function generateSortingData() {
+    sortingData = [];
+    arrayElements.forEach((elem, idx) => {
+        sortingData.push({
+            "position": idx,
+            "value": elem,
+            "color": "blue"
+        });
+    });
+}
 
 async function delay(duration) {
     return new Promise(resolve =>
@@ -100,13 +79,13 @@ function draw(initialData) {
 
 }
 
-function redraw(newData, transitionDuration = 100) {
+function redraw(newData) {
     sortingSVG = d3.select("#visual-container")
 
     var bars = sortingSVG.selectAll("g")
         .data(newData)
         .transition()
-        .duration(transitionDuration)
+        .duration(duration)
 
     var rectAttrs = bars.select("rect")
         .attr("x", function (d, i) { return (d.position * 1000 / newData.length) + 1; })
@@ -122,13 +101,13 @@ function redraw(newData, transitionDuration = 100) {
 
 }
 
-async function bubbleSort(delayDuration = 100) {
+async function bubbleSort() {
     for (let i = 0; i < arrayElements.length - 1; i++) {
         for (let j = 0; j < arrayElements.length - i - 1; j++) {
             changeColor(j, "red");
             changeColor(j + 1, "red");
 
-            await delay(delayDuration);
+            await delay(duration);
 
             if (arrayElements[j] > arrayElements[j + 1]) {
                 swapElementsAtIndex(j, j + 1);
@@ -141,11 +120,13 @@ async function bubbleSort(delayDuration = 100) {
         changeColor(arrayElements.length - i - 1, "green");
     }
     changeColor(0, "green");
+
+    return arrayElements;
 }
 
-async function selectionSort(delayDuration = 400) {
+async function selectionSort() {
     for (let i = 0; i < arrayElements.length - 1; i++) {
-        
+
         var minIdx = i;
         changeColor(minIdx, "yellow");
 
@@ -153,7 +134,7 @@ async function selectionSort(delayDuration = 400) {
             if (i != minIdx) changeColor(i, "red");
             if (j != minIdx) changeColor(j, "red");
 
-            await delay(delayDuration);
+            await delay(duration);
 
             if (arrayElements[minIdx] > arrayElements[j]) {
                 changeColor(minIdx, (minIdx == i || minIdx == j) ? "red" : "blue");
@@ -172,27 +153,31 @@ async function selectionSort(delayDuration = 400) {
         changeColor(i, "green");
     }
     changeColor((arrayElements.length - 1), "green");
+
+    return arrayElements;
 }
 
-async function insertionSort(delayDuration = 400) {
+async function insertionSort() {
     changeColor(0, "green");
-    for (let i = 1; i < arrayElements.length; i++) {       
+    for (let i = 1; i < arrayElements.length; i++) {
         for (let j = i; j > 0; j--) {
-            if(arrayElements[j - 1] > arrayElements[j]) {
+            if (arrayElements[j - 1] > arrayElements[j]) {
                 changeColor(j - 1, "red");
                 changeColor(j, "yellow");
 
-                await delay(delayDuration);
+                await delay(duration);
 
                 swapElementsAtIndex(j - 1, j);
 
-                changeColor(j - 1, "blue");
-                changeColor(j, "blue");
+                changeColor(j - 1, "green");
+                changeColor(j, "green");
             }
         }
+        changeColor(i, "green")
     }
+
+    return arrayElements;
 }
 
-
+generateSortingData();
 draw(sortingData);
-insertionSort();

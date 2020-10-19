@@ -6,15 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorting Visualization</title>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
 
 <body>
+    <section class="Heading">
+        <div class="text-white text-center">
+            <h1>Sorting Visualization</h1>
+        </div>
+    </section>
+
+    <section class="dataField">
+
+        <div class="container">
+            <div class="jumbotron">
+                
+                <h1 class="display-3 text-center">Learn various Sorting Algorithms by visualization</h1>
+                
+                <hr class="my-4">  
+                    
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <!--Text field to generate blocks-->
+                        <p class="lead">Enter number of blocks</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="blocks" placeholder="Eg. 10">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-md" id="block-btn" type="button">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <!--Text field to enter speed-->
+                        <p class="lead">Enter speed</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="speed" placeholder="Eg. 1">
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <!--Dropdown menu for sorting algorithms-->
+                        <p>Choose the sorting algorithm</p>
+                        <div class="input-group">
+                            <select class="custom-select" placeholder="Sorting Algorithms" id="inputGroupSelect">
+                                <option value="1">Bubble sort</option>
+                                <option value="2">Insertion sort</option>
+                                <option value="3">Selection sort</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-md" id="srt" type="button">Sort</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm"></div>
+                </div>
+            
+            </div>
+        </div>
+    
+    </section>
+
     <div id="visual-container"></div>
 
-    <script src="script.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="sorting_visualization_d3js.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

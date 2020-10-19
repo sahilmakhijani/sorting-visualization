@@ -1,7 +1,47 @@
+body{
+    background-color:#fbe3e8;
+    color: white;
+}
+
+.jumbotron{
+    background-color: #ccf3f2;
+    color: #030200;
+}
+
+.jumbotron p{
+    color: #030200;
+    font-size: larger;
+    font-weight: 600;
+}
+
+.jumbotron h1{
+    font-size: xx-large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 800;
+}
+
+.dataField button{
+    background-color:#474B4F;
+}
+
+.Heading{
+    background-color: #474B4F;
+}
+
+.Heading h1{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #fbe3e8;
+    width: 6em; 
+} 
 #visual-container {
     width: 80%;
     padding: 5%;
-    margin: 100px auto;
+    margin: 10px auto;
     display: flex;
 }
 
