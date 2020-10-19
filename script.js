@@ -11,8 +11,8 @@ var isSorting = false;
 function getelements(){
     let blockVal = parseInt(block.value);
 
-    if (!(1 < blockVal && blockVal <= 64) || blockVal == NaN) {
-        alert("Enter valid number of blocks (Between 1 and 64)");
+    if (!(2 <= blockVal && blockVal <= 64) || blockVal == NaN) {
+        alert("Enter valid number of blocks (Between 2 and 64)");
         return;
     }
 
@@ -30,7 +30,7 @@ function getelements(){
 
 async function sorting(){
     if (isSorting) {
-        alert("Sorting is already going on");
+        alert("Please wait, sorting in progress!");
         return;
     }
 

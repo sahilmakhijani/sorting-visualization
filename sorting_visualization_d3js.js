@@ -1,10 +1,10 @@
 
 // Value should be between 0 to 100;
-arrayElements = [50, 20, 70, 90, 21, 10, 40, 80, 21, 30, 13, 37, 56, 75, 90, 99, 17, 35, 47, 89, 93, 97, 61, 30, 34];
+var arrayElements = [];
 
-sortingData = [];
+var sortingData = [];
 
-duration = 100;
+var duration = 100;
 
 function generateSortingData() {
     sortingData = [];
@@ -179,5 +179,10 @@ async function insertionSort() {
     return arrayElements;
 }
 
+
+for(let i = 0; i < 25; i++){
+    let elem = Math.floor(Math.random() * 100) + 1;
+    arrayElements.push(elem);
+}
 generateSortingData();
 draw(sortingData);
