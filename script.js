@@ -1,13 +1,15 @@
 var generate_btn = document.getElementById("block-btn");
 var sorting_btn = document.getElementById("srt");
 
+var block = document.getElementById("blocks");
+var speed = document.getElementById("speed");
+var options = document.getElementById("inputGroupSelect");
+
 var isSorting = false;
 
 
 function getelements(){
-    var block = document.getElementById("blocks");
-
-    var blockVal = parseInt(block.value);
+    let blockVal = parseInt(block.value);
 
     if (!(1 < blockVal && blockVal <= 64) || blockVal == NaN) {
         alert("Enter valid number of blocks (Between 1 and 64)");
@@ -17,7 +19,7 @@ function getelements(){
     arrayElements = [];
 
     for(let i=0;i<blockVal;i++){
-        let a = Math.round(Math.random()*100) + 1;
+        let a = Math.floor(Math.random() * 100) + 1;
         arrayElements.push(a);
     }
     
@@ -31,9 +33,6 @@ async function sorting(){
         alert("Sorting is already going on");
         return;
     }
-
-    var speed = document.getElementById("speed");
-    var options = document.getElementById("inputGroupSelect");
 
     let val = options.value;
 
