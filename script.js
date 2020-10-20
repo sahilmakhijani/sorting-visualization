@@ -8,27 +8,32 @@ var options = document.getElementById("inputGroupSelect");
 var isSorting = false;
 
 
-function getelements(){
+function getelements() {
+    if (isSorting) {
+        alert("Please wait, sorting in progress!");
+        return;
+    }
+
     let blockVal = parseInt(block.value);
 
-    if (!(2 <= blockVal && blockVal <= 64) || blockVal == NaN) {
+    if (!(2 <= blockVal && blockVal <= 64) || isNaN(blockVal)) {
         alert("Enter valid number of blocks (Between 2 and 64)");
         return;
     }
 
     arrayElements = [];
 
-    for(let i=0;i<blockVal;i++){
+    for (let i = 0; i < blockVal; i++) {
         let a = Math.floor(Math.random() * 100) + 1;
         arrayElements.push(a);
     }
-    
+
     generateSortingData();
     draw(sortingData);
 }
 
 
-async function sorting(){
+async function sorting() {
     if (isSorting) {
         alert("Please wait, sorting in progress!");
         return;
@@ -36,15 +41,17 @@ async function sorting(){
 
     let val = options.value;
 
-    let speedVal = speed.value;
-    if (speedVal == "") {
-        speedVal = 1;
+    let speedVal = parseInt(speed.value) || 1; // If speed.value is not int, default value is 1x speed
+
+    if (speedVal <= 0) {
+        alert("Enter valid speed, i.e., greater than 0");
+        return;
     }
 
     duration = 1 / speedVal * 400;
 
     isSorting = true;
-    switch(val){
+    switch (val) {
         case '1':
             await bubbleSort();
             break;
@@ -54,11 +61,13 @@ async function sorting(){
         case '3':
             await selectionSort();
             break;
-        
+        default:
+            alert("Select a Sorting Method");
+            return;
     }
     isSorting = false;
 }
 
 
-generate_btn.addEventListener("click",getelements);
-sorting_btn.addEventListener("click",sorting);
+generate_btn.addEventListener("click", getelements);
+sorting_btn.addEventListener("click", sorting);
