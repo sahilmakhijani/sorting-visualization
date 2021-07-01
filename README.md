@@ -2,7 +2,7 @@
 
 Sorting Algorithms Visualized
 
-Visit https://sahilmakhijani.github.io/Sorting-Algorithms-Visualized/ to see the visualization.
+Visit https://sahilmakhijani.github.io/sorting-visualization/ to see the visualization.
 
 Currently, following sorting algorithms are supported
 - Bubble Sort
